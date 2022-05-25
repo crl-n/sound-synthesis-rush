@@ -6,7 +6,7 @@
 /*   By: cnysten <cnysten@student.hive.fi>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2022/05/25 11:51:46 by cnysten		   #+#	#+#			 */
-/*   Updated: 2022/05/25 15:53:07 by carlnysten       ###   ########.fr       */
+/*   Updated: 2022/05/25 17:02:29 by carlnysten       ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -39,18 +39,9 @@ void	play(t_song song, SDL_AudioDeviceID audio_device)
 
 void	play_wave(SDL_AudioDeviceID audio_device, t_note note)
 {
-	long long int	i;
-	int8_t			sample;
-	int				sample_size = sizeof(int8_t);
-
-	i = 0;
-	while (i++ < 80000)
-	{
-		sample = wave_functions[note.pitch](audio_device, note.duration);
-		SDL_QueueAudio(audio_device, &sample, sample_size);
-	}
+	wave_functions[0](audio_device, note.duration);
 	SDL_PauseAudioDevice(audio_device, 0);
-	SDL_Delay(3000);
+	SDL_Delay(10000);
 	return ;
 }
 
@@ -91,7 +82,7 @@ int	main(int argc, char **argv)
 			t_note	note;
 
 			note.pitch = a;
-			note.duration = 1000;
+			note.duration = 5;
 			play_wave(audio_device, note);
 			printf("Debug 🎵\n");
 		}

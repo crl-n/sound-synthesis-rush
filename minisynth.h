@@ -6,7 +6,7 @@
 /*   By: cnysten <cnysten@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 12:14:58 by cnysten           #+#    #+#             */
-/*   Updated: 2022/05/25 15:51:26 by carlnysten       ###   ########.fr       */
+/*   Updated: 2022/05/25 17:21:27 by carlnysten       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # define GAIN 5000
 # define SAMPLE_SIZE 2
+# define FREQ 44100
 
 typedef	int (*t_wavefunc)(SDL_AudioDeviceID audio_device, int duration);
 
