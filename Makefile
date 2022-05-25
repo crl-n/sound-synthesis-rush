@@ -3,9 +3,9 @@ NAME = minisynth
 SRC = main.c
 
 CFLAGS = -Wall -Werror -Wextra
-CFLAGS += -I${HOME}/.brew/include/SDL2 -D_THREAD_SAFE
+CFLAGS += $(shell sdl2-config --cflags)
 
-LIB = -L${HOME}/.brew/lib -lSDL2
+LIB = $(shell sdl2-config --libs)
 
 all: $(NAME)
 
