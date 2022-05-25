@@ -6,7 +6,7 @@
 /*   By: cnysten <cnysten@student.hive.fi>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2022/05/25 11:51:46 by cnysten		   #+#	#+#			 */
-/*   Updated: 2022/05/25 18:20:26 by cnysten          ###   ########.fr       */
+/*   Updated: 2022/05/25 19:19:51 by cnysten          ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	play(t_song song, SDL_AudioDeviceID audio_device)
 
 void	play_wave(SDL_AudioDeviceID audio_device, t_note note)
 {
-	wave_functions[0](audio_device, note);
+	wave_functions[3](audio_device, note);
 	SDL_PauseAudioDevice(audio_device, 0);
 	SDL_Delay(SDL_GetQueuedAudioSize(audio_device) / 2 / FREQ * 1000);
 	return ;
