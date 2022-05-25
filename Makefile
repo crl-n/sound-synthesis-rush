@@ -3,9 +3,9 @@ NAME = minisynth
 SRC = main.c
 
 CFLAGS = -Wall -Werror -Wextra
-CFLAGS += -I/Users/cnysten/.brew/include/SDL2 -D_THREAD_SAFE
+CFLAGS += -I${HOME}/.brew/include/SDL2 -D_THREAD_SAFE
 
-LIB = -L/Users/cnysten/.brew/lib -lSDL2
+LIB = -L${HOME}/.brew/lib -lSDL2
 
 all: $(NAME)
 
