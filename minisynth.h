@@ -6,12 +6,31 @@
 /*   By: cnysten <cnysten@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 12:14:58 by cnysten           #+#    #+#             */
-/*   Updated: 2022/05/25 12:34:06 by cnysten          ###   ########.fr       */
+/*   Updated: 2022/05/25 15:51:26 by carlnysten       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISYNTH_H
 # define MINISYNTH_H
+
+# include <SDL.h>
+
+# define GAIN 5000
+# define SAMPLE_SIZE 2
+
+typedef	int (*t_wavefunc)(SDL_AudioDeviceID audio_device, int duration);
+
+int	sine_wave(SDL_AudioDeviceID audio_device, int duration);
+int	saw_wave(SDL_AudioDeviceID audio_device, int duration);
+int	square_wave(SDL_AudioDeviceID audio_device, int duration);
+int	tri_wave(SDL_AudioDeviceID audio_device, int duration);
+
+static const t_wavefunc wave_functions[] = {
+	sine_wave,
+	saw_wave,
+	square_wave,
+	tri_wave
+};
 
 typedef enum e_instrument
 {

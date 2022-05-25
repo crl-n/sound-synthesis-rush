@@ -1,6 +1,6 @@
 NAME = minisynth
 
-SRC = main.c
+SRC = main.c wavefunctions.c
 
 CFLAGS = -Wall -Werror -Wextra
 CFLAGS += $(shell sdl2-config --cflags)
