@@ -6,7 +6,7 @@
 /*   By: cnysten <cnysten@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 12:14:58 by cnysten           #+#    #+#             */
-/*   Updated: 2022/05/25 17:21:27 by carlnysten       ###   ########.fr       */
+/*   Updated: 2022/05/25 17:57:35 by cnysten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,6 @@
 # define GAIN 5000
 # define SAMPLE_SIZE 2
 # define FREQ 44100
-
-typedef	int (*t_wavefunc)(SDL_AudioDeviceID audio_device, int duration);
-
-int	sine_wave(SDL_AudioDeviceID audio_device, int duration);
-int	saw_wave(SDL_AudioDeviceID audio_device, int duration);
-int	square_wave(SDL_AudioDeviceID audio_device, int duration);
-int	tri_wave(SDL_AudioDeviceID audio_device, int duration);
-
-static const t_wavefunc wave_functions[] = {
-	sine_wave,
-	saw_wave,
-	square_wave,
-	tri_wave
-};
 
 typedef enum e_instrument
 {
@@ -73,5 +59,19 @@ typedef struct	s_song
 	int		tempo;
 	t_track	*tracks;
 }	t_song;
+
+typedef	int (*t_wavefunc)(SDL_AudioDeviceID audio_device, t_note note);
+
+int	sine_wave(SDL_AudioDeviceID audio_device, t_note note);
+int	saw_wave(SDL_AudioDeviceID audio_device, t_note note);
+int	square_wave(SDL_AudioDeviceID audio_device, t_note note);
+int	tri_wave(SDL_AudioDeviceID audio_device, t_note note);
+
+static const t_wavefunc wave_functions[] = {
+	sine_wave,
+	saw_wave,
+	square_wave,
+	tri_wave
+};
 
 #endif

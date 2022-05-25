@@ -6,13 +6,12 @@
 /*   By: cnysten <cnysten@student.hive.fi>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2022/05/25 11:51:46 by cnysten		   #+#	#+#			 */
-/*   Updated: 2022/05/25 17:02:29 by carlnysten       ###   ########.fr       */
+/*   Updated: 2022/05/25 18:20:26 by cnysten          ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
 #include <SDL.h>
 #include <SDL_audio.h>
-#include <SDL_mixer.h>
 #include <stdio.h>
 #include <strings.h>
 
@@ -39,9 +38,9 @@ void	play(t_song song, SDL_AudioDeviceID audio_device)
 
 void	play_wave(SDL_AudioDeviceID audio_device, t_note note)
 {
-	wave_functions[0](audio_device, note.duration);
+	wave_functions[0](audio_device, note);
 	SDL_PauseAudioDevice(audio_device, 0);
-	SDL_Delay(10000);
+	SDL_Delay(SDL_GetQueuedAudioSize(audio_device) / 2 / FREQ * 1000);
 	return ;
 }
 
@@ -60,7 +59,7 @@ SDL_AudioDeviceID	init_sdl(void)
 	SDL_AudioSpec audio_spec;
 	SDL_zero(audio_spec);
 	audio_spec.freq = 44100;
-	audio_spec.format = AUDIO_S8;
+	audio_spec.format = AUDIO_S16SYS;
 	audio_spec.channels = 2;
 	audio_spec.samples = 1024;
 	audio_spec.callback = NULL;
@@ -77,20 +76,22 @@ int	main(int argc, char **argv)
 	{
 		audio_device = init_sdl();
 
-		if (strcmp(argv[1], "-d") == 0)
+		if (strncmp(argv[1], "-d", 2) == 0)
 		{
 			t_note	note;
 
 			note.pitch = a;
+			if (argv[1][2])
+				note.pitch = argv[1][2] - 'a' + 1;
 			note.duration = 5;
-			play_wave(audio_device, note);
 			printf("Debug 🎵\n");
+			play_wave(audio_device, note);
 		}
 		else
 		{
 			t_song	song = parse(argv[1]);
-			play(song, audio_device);
 			printf("🎵\n");
+			play(song, audio_device);
 		}
 	}
 	else
