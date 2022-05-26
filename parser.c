@@ -6,7 +6,7 @@
 /*   By: carlnysten <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 12:36:24 by carlnysten        #+#    #+#             */
-/*   Updated: 2022/05/26 14:01:28 by cnysten          ###   ########.fr       */
+/*   Updated: 2022/05/26 14:34:52 by cnysten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,16 @@ t_song	parse(char *filename)
 				break ;
 			}
 			free(line);
+			line = NULL;
 		}
 		
-		// Get tracks
+		// Get track instruments
+		int	n_tracks = 1;
 		while ((bytes_read = getline(&line, &linesize, file)))
 		{
 			if (strncmp(line, "tracks", 6) == 0)
 			{
 				// Count how many tracks
-				int	n_tracks = 1;
 				for (int i = 0; line[i]; i++)
 				{
 					if (line[i] == ',')
@@ -80,6 +81,26 @@ t_song	parse(char *filename)
 			line = NULL;
 		}
 
+		// Get track notes
+		while ((bytes_read = getline(&line, &linesize, file)))
+		{
+			if (isdigit(line[0]) && line[1] == ':')
+			{
+				char	*token = strtok(line, " ");
+				token = strtok(NULL, " ");
+				while (token != NULL)
+				{
+					//printf("%s ", token);
+					token = strtok(NULL, " ");
+				}
+				free(line);
+				line = NULL;
+				break ;
+			}
+			free(line);
+			line = NULL;
+		}
+		
 	}
 	else
 	{
