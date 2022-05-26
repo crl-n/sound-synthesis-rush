@@ -2,4 +2,5 @@
 minisynth
 examples
 *.swp
+*.swo
 *.Dsym

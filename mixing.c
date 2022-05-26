@@ -6,7 +6,7 @@
 /*   By: jraivio <jraivio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 14:04:19 by jraivio           #+#    #+#             */
-/*   Updated: 2022/05/26 14:45:18 by jraivio          ###   ########.fr       */
+/*   Updated: 2022/05/26 15:23:15 by jraivio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,18 @@ size_t	add_note(t_note	note, t_instrument instrument, t_song *song,
 {
 	t_wavetable	wavetable = wave_functions[instrument](note);
 
-	for (size_t i = 0; i < note.duration; i++;)
+	for (size_t i = 0; i < note.duration; i++)
 	{
 		if (track_i > song->size)
 		{
 			song->size *= 2;
-			song->master = realloc(song->master, size * sizeof(song->master));
-			song->instrument_count = realloc(song->master, 
-										size * sizeof(song->instrument_count));
-			if (song->master == NULL || song->instrument_count = NULL)
+			song->master = realloc(song->master, song->size * sizeof(song->master));
+			memset(song->master + (song->size / 2), 0, song->size / 2);
+			if (song->master == NULL)
 				exit(1);
 		}
-		song->master[track_i] += wavetable.samples[wavetable.size % i] * GAIN;
-		song->instrument_count[track_i]++;
+		song->master[track_i].sample += wavetable.samples[wavetable.size % i] * GAIN;
+		song->master[track_i].instrument_count++;
 		track_i++;
 	}
 	return (track_i);
@@ -37,9 +36,9 @@ size_t	add_note(t_note	note, t_instrument instrument, t_song *song,
 
 void	mix_song_volume(t_song *song)
 {
-	for (size_t i = 0; i < song->size; i++;)
+	for (size_t i = 0; i < song->size; i++)
 	{
-		if (song->instrument_count[i] > 1)
-			song->master[i] /= song->instrument_count[i];
+		if (song->master[i].instrument_count > 1)
+			song->master[i].sample /= song->master[i].instrument_count;
 	}
 }

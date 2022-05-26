@@ -6,7 +6,7 @@
 /*   By: carlnysten <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 12:36:24 by carlnysten        #+#    #+#             */
-/*   Updated: 2022/05/26 14:55:31 by cnysten          ###   ########.fr       */
+/*   Updated: 2022/05/26 15:27:11 by jraivio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ t_song	parse(char *filename)
 	size_t	sample_index = 0;
 
 	bzero(&song, sizeof (t_song));
-	(void) sample_index;
+	song.size = SAMPLE_RATE;
+	song.master = malloc(sizeof(song.master) * song.size);
+	bzero(song.master, song.size);
 
 	if ((file = fopen(filename, "r")))
 	{
@@ -100,11 +102,12 @@ t_song	parse(char *filename)
 						printf("%d ", atoi(token + 3));
 					printf("%f ", atof(strchr(token, '/') + 1));
 					*/
-
+					sample_index += add_note((t_note){.pitch = 440.0f, .duration = 10000}, sine, &song, sample_index);
 					token = strtok(NULL, " ");
 				}
 				free(line);
 				line = NULL;
+				sample_index = 0;
 				break ;
 			}
 			free(line);

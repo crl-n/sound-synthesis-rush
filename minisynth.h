@@ -6,7 +6,7 @@
 /*   By: cnysten <cnysten@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 12:14:58 by cnysten           #+#    #+#             */
-/*   Updated: 2022/05/26 14:46:24 by cnysten          ###   ########.fr       */
+/*   Updated: 2022/05/26 15:12:34 by jraivio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,13 @@ typedef struct	s_note
 
 typedef struct	s_track
 {
-	t_instrument	instrument;
-	t_note			*notes;
+	int16_t		sample;
+	int8_t		instrument_count;
 }	t_track;
 
 typedef struct	s_song
 {
-	int16_t	*master;
-	int8_t	*instrument_count;
+	t_track	*master;
 	size_t	size;
 	int		tempo;
 }	t_song;
