@@ -6,7 +6,7 @@
 /*   By: cnysten <cnysten@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 12:14:58 by cnysten           #+#    #+#             */
-/*   Updated: 2022/05/26 11:05:40 by carlnysten       ###   ########.fr       */
+/*   Updated: 2022/05/26 13:02:55 by carlnysten       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,16 @@ typedef struct	s_track
 typedef struct	s_song
 {
 	int		tempo;
-	t_track	*tracks;
+	t_track	*master;
 }	t_song;
 
 typedef	int (*t_wavefunc)(SDL_AudioDeviceID audio_device, t_note note);
 
-int	sine_wave(SDL_AudioDeviceID audio_device, t_note note);
-int	saw_wave(SDL_AudioDeviceID audio_device, t_note note);
-int	square_wave(SDL_AudioDeviceID audio_device, t_note note);
-int	tri_wave(SDL_AudioDeviceID audio_device, t_note note);
+int		sine_wave(SDL_AudioDeviceID audio_device, t_note note);
+int		saw_wave(SDL_AudioDeviceID audio_device, t_note note);
+int		square_wave(SDL_AudioDeviceID audio_device, t_note note);
+int		tri_wave(SDL_AudioDeviceID audio_device, t_note note);
+t_song	parse(char *filename);
 
 static const t_wavefunc wave_functions[] = {
 	sine_wave,

@@ -6,7 +6,7 @@
 /*   By: cnysten <cnysten@student.hive.fi>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2022/05/25 11:51:46 by cnysten		   #+#	#+#			 */
-/*   Updated: 2022/05/26 12:35:12 by carlnysten       ###   ########.fr       */
+/*   Updated: 2022/05/26 12:37:08 by carlnysten       ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -49,14 +49,6 @@ void	play_wave(SDL_AudioDeviceID audio_device, t_note note)
 	printf("Delay: %d", delay);
 	SDL_Delay(delay);
 	return ;
-}
-
-t_song	parse(char *filename)
-{
-	(void) filename;
-	t_song	song;
-	bzero(&song, sizeof (t_song));
-	return (song);
 }
 
 SDL_AudioDeviceID	init_sdl(void)
