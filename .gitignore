@@ -1,4 +1,5 @@
 .DS_Store
 minisynth
-minisynth.dSYM
 examples
+*.swp
+*.Dsym

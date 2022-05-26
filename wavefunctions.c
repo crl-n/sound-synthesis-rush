@@ -6,16 +6,18 @@
 /*   By: carlnysten <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:03:07 by carlnysten        #+#    #+#             */
-/*   Updated: 2022/05/26 12:10:40 by carlnysten       ###   ########.fr       */
+/*   Updated: 2022/05/26 14:03:28 by jraivio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <SDL.h>
 #include <math.h>
 #include "minisynth.h"
+#include <stdio.h>
 
 #define TEMPO 110
 
+/*
 static const float pitch[] = {
 	0.0f,
 	220.0f,
@@ -26,22 +28,29 @@ static const float pitch[] = {
 	349.23f,
 	392.00f
 };
+*/
 
-int	sine_wave(SDL_AudioDeviceID audio_device, t_note note)
+t_wavetable	sine_wave(t_note note)
 {
 	float	x = 0.0f;
-	int16_t	sample = 0;
+	t_wavetable wavetable = {.samples = malloc(SAMPLE_SIZE * note.duration),
+	   						.size = (SAMPLE_RATE / note.pitch)};
 
+	if (wavetable.samples == NULL)
+	{
+		printf("Failed to malloc wavetable\n");
+		exit(1);
+	}
 	//printf("Sine\n");
-	for (int i = 0; i < SAMPLE_RATE * (TEMPO / 60) * note.duration; i++)
+	for (size_t i = 0; i < wavetable.size; i++)
 	{
 		x += 1.0f;
-		sample = sin((x / (float) SAMPLE_RATE) * 2.0f * M_PI * pitch[note.pitch]) * GAIN;
-		SDL_QueueAudio(audio_device, &sample, SAMPLE_SIZE);
+		wavetable.samples[i] = sin((x / (float)SAMPLE_RATE) * 2.0f * M_PI * note.pitch);
+	//	printf("%f\n", wavetable.samples[i]);
 	}
-	return (0);
+	return (wavetable);
 }
-
+/*
 int	saw_wave(SDL_AudioDeviceID audio_device, t_note note)
 {
 	float	x = -0.01 * pitch[note.pitch] / 2;
@@ -91,4 +100,4 @@ int	square_wave(SDL_AudioDeviceID audio_device, t_note note)
 		SDL_QueueAudio(audio_device, &sample, SAMPLE_SIZE);
 	}
 	return (0);
-}
+}*/

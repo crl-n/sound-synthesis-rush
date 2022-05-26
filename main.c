@@ -6,7 +6,7 @@
 /*   By: cnysten <cnysten@student.hive.fi>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2022/05/25 11:51:46 by cnysten		   #+#	#+#			 */
-/*   Updated: 2022/05/26 12:37:08 by carlnysten       ###   ########.fr       */
+/*   Updated: 2022/05/26 14:36:48 by jraivio          ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -17,22 +17,14 @@
 
 #include "minisynth.h"
 
-void	play(t_song song, SDL_AudioDeviceID audio_device)
+void	play(t_song *song, SDL_AudioDeviceID audio_device)
 {
-	long long int	i;
-	int8_t			sample;
-	int				sample_size = sizeof(int8_t);
-
-	i = 0;
-	(void) song;
-	sample = 0;
-	while (i++ < 80000)
+	for (size_t i; i < song->size; i++;)
 	{
-		sample++; 
-		SDL_QueueAudio(audio_device, &sample, sample_size);
+		SDL_QueueAudio(audio_device, &song->master[i], sample_size);
 	}
 	SDL_PauseAudioDevice(audio_device, 0);
-	SDL_Delay(3000);
+	SDL_Delay(SAMPLE_RATE / song->size * 1000)
 	return ;
 }
 
@@ -40,10 +32,10 @@ void	play_wave(SDL_AudioDeviceID audio_device, t_note note)
 {
 	int	delay;
 
-	wave_functions[0](audio_device, note);
-	wave_functions[1](audio_device, note);
-	wave_functions[2](audio_device, note);
-	wave_functions[3](audio_device, note);
+	wave_functions[0](note);
+//	wave_functions[1](audio_device, note);
+//	wave_functions[2](audio_device, note);
+//	wave_functions[3](audio_device, note);
 	SDL_PauseAudioDevice(audio_device, 0);
 	delay = SDL_GetQueuedAudioSize(audio_device) / 2 / SAMPLE_RATE * 1000;
 	printf("Delay: %d", delay);
@@ -81,16 +73,16 @@ int	main(int argc, char **argv)
 		{
 			t_note	note;
 
-			note.pitch = a;
-			if (argv[1][2] <= 'g' && argv[1][2] >= 'a')
-				note.pitch = argv[1][2] - 'a' + 1;
-			note.duration = 2;
+			note.pitch = 440.0f;
+			//if (argv[1][2] <= 'g' && argv[1][2] >= 'a')
+			//	note.pitch = argv[1][2] - 'a' + 1;
+			note.duration = 2 * SAMPLE_RATE;
 			printf("Debug 🎵\n");
 			play_wave(audio_device, note);
 		}
 		else
 		{
-			t_song	song = parse(argv[1]);
+			t_song	*song = parse(argv[1]);
 			printf("🎵\n");
 			play(song, audio_device);
 		}
