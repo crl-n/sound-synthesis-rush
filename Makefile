@@ -13,6 +13,9 @@ all: $(NAME)
 $(NAME): $(SRC)
 	$(CC) $(CFLAGS) $(LIB) $(SRC) -o $(NAME)
 
+debug: $(SRC)
+	$(CC) $(CFLAGS) -g $(LIB) $(SRC) -o $(NAME)
+
 clean:
 
 fclean: clean
