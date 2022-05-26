@@ -6,7 +6,7 @@
 /*   By: carlnysten <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 12:36:24 by carlnysten        #+#    #+#             */
-/*   Updated: 2022/05/26 14:34:52 by cnysten          ###   ########.fr       */
+/*   Updated: 2022/05/26 14:55:31 by cnysten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,16 @@ t_song	parse(char *filename)
 				while (token != NULL)
 				{
 					//printf("%s ", token);
+
+					/*
+					printf("%c ", token[0]);
+					if (isdigit(token[2]))
+						printf("%d ", atoi(token + 2));
+					else
+						printf("%d ", atoi(token + 3));
+					printf("%f ", atof(strchr(token, '/') + 1));
+					*/
+
 					token = strtok(NULL, " ");
 				}
 				free(line);
