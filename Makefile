@@ -4,6 +4,7 @@ SRC = main.c wavefunctions.c parser.c
 
 CFLAGS = -Wall -Werror -Wextra
 CFLAGS += $(shell sdl2-config --cflags)
+CFLAGS_D = $(CFLAGS) -g
 
 LIB = $(shell sdl2-config --libs)
 
@@ -18,3 +19,6 @@ fclean: clean
 	/bin/rm $(NAME)
 
 re: fclean all
+
+debug:
+	$(CC) $(CFLAGS_D) $(LIB) $(SRC) -o $(NAME)
