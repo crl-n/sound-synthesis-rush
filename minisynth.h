@@ -6,7 +6,7 @@
 /*   By: cnysten <cnysten@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 12:14:58 by cnysten           #+#    #+#             */
-/*   Updated: 2022/05/26 15:12:34 by jraivio          ###   ########.fr       */
+/*   Updated: 2022/05/26 16:52:53 by jraivio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ typedef struct	s_wavetable
 typedef	t_wavetable (*t_wavefunc)(t_note note);
 
 t_wavetable	sine_wave(t_note note);
-//t_wavetable	saw_wave(SDL_AudioDeviceID audio_device, t_note note);
-//t_wavetable	square_wave(SDL_AudioDeviceID audio_device, t_note note);
-//t_wavetable	tri_wave(SDL_AudioDeviceID audio_device, t_note note);
+t_wavetable	saw_wave(t_note note);
+t_wavetable	square_wave(t_note note);
+t_wavetable	tri_wave(t_note note);
 t_song		parse(char *filename);
 size_t		add_note(t_note	note, t_instrument instrument, t_song *song, 
 					size_t track_i);
@@ -77,9 +77,9 @@ void		mix_song_volume(t_song *song);
 
 static const t_wavefunc wave_functions[] = {
 	sine_wave,
-//	saw_wave,
-//	tri_wave,
-//	square_wave
+	saw_wave,
+	tri_wave,
+	square_wave
 };
 
 #endif

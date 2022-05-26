@@ -6,7 +6,7 @@
 /*   By: jraivio <jraivio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 14:04:19 by jraivio           #+#    #+#             */
-/*   Updated: 2022/05/26 15:23:15 by jraivio          ###   ########.fr       */
+/*   Updated: 2022/05/26 19:06:06 by jraivio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,32 @@
 size_t	add_note(t_note	note, t_instrument instrument, t_song *song, 
 		size_t track_i)
 {
+	//if (note.pitch < 0)
+	//	return (track_i + note.duration);
 	t_wavetable	wavetable = wave_functions[instrument](note);
 
 	for (size_t i = 0; i < note.duration; i++)
 	{
 		if (track_i > song->size)
 		{
-			song->size *= 2;
-			song->master = realloc(song->master, song->size * sizeof(song->master));
-			memset(song->master + (song->size / 2), 0, song->size / 2);
-			if (song->master == NULL)
+			t_track *temp = malloc(sizeof(t_track) * (song->size * 2));
+			if (!temp)
 				exit(1);
+			bzero(temp, sizeof(t_track) * (song->size * 2));
+			memcpy(temp, song->master, sizeof(t_track) * song->size);
+			song->size *= 2;
+			free(song->master);
+			song->master = temp; 
 		}
-		song->master[track_i].sample += wavetable.samples[wavetable.size % i] * GAIN;
-		song->master[track_i].instrument_count++;
+		if (note.pitch > 0)
+		{
+			song->master[track_i].sample += wavetable.samples[i % wavetable.size] * GAIN;
+			song->master[track_i].instrument_count++;
+		}
 		track_i++;
 	}
+	if (wavetable.samples)
+		free(wavetable.samples);
 	return (track_i);
 }
 

@@ -6,7 +6,7 @@
 /*   By: cnysten <cnysten@student.hive.fi>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2022/05/25 11:51:46 by cnysten		   #+#	#+#			 */
-/*   Updated: 2022/05/26 14:44:41 by cnysten          ###   ########.fr       */
+/*   Updated: 2022/05/26 18:44:12 by jraivio          ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	play(t_song *song, SDL_AudioDeviceID audio_device)
 {
 	for (size_t i = 0; i < song->size; i++)
 	{
-		SDL_QueueAudio(audio_device, &song->master[i], SAMPLE_SIZE);
+		SDL_QueueAudio(audio_device, &song->master[i].sample, SAMPLE_SIZE);
 	}
 	SDL_PauseAudioDevice(audio_device, 0);
-	SDL_Delay(SAMPLE_RATE / song->size * 1000);
+	SDL_Delay(15000);
 	return ;
 }
 
@@ -83,6 +83,7 @@ int	main(int argc, char **argv)
 		else
 		{
 			t_song	song = parse(argv[1]);
+			//mix_song_volume(&song);
 			printf("🎵\n");
 			play(&song, audio_device);
 		}
