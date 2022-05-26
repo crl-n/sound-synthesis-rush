@@ -6,7 +6,7 @@
 /*   By: jraivio <jraivio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 14:04:19 by jraivio           #+#    #+#             */
-/*   Updated: 2022/05/26 14:30:43 by jraivio          ###   ########.fr       */
+/*   Updated: 2022/05/26 14:45:18 by jraivio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	add_note(t_note	note, t_instrument instrument, t_song *song,
 {
 	t_wavetable	wavetable = wave_functions[instrument](note);
 
-	for (size_t i; i < note.duration; i++;)
+	for (size_t i = 0; i < note.duration; i++;)
 	{
 		if (track_i > song->size)
 		{
@@ -37,7 +37,7 @@ size_t	add_note(t_note	note, t_instrument instrument, t_song *song,
 
 void	mix_song_volume(t_song *song)
 {
-	for (size_t i; i < song->size; i++;)
+	for (size_t i = 0; i < song->size; i++;)
 	{
 		if (song->instrument_count[i] > 1)
 			song->master[i] /= song->instrument_count[i];
