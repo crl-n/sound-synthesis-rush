@@ -6,7 +6,7 @@
 /*   By: cnysten <cnysten@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 12:14:58 by cnysten           #+#    #+#             */
-/*   Updated: 2022/05/26 13:02:55 by carlnysten       ###   ########.fr       */
+/*   Updated: 2022/05/26 13:25:26 by jraivio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,8 @@ typedef enum e_pitch
 
 typedef struct	s_note
 {
-	t_pitch	pitch;
-	int		alteration;
-	int		octave;
-	float	duration;
-	float	current_duration;
+	float	pitch;
+	size_t	duration;
 }	t_note;
 
 typedef struct	s_track
@@ -56,17 +53,25 @@ typedef struct	s_track
 
 typedef struct	s_song
 {
-	int		tempo;
-	t_track	*master;
+	int16_t	*master;
+	int8_t	*instrument_count;
 }	t_song;
 
-typedef	int (*t_wavefunc)(SDL_AudioDeviceID audio_device, t_note note);
+typedef struct	s_wavetable
+{
+	int16_t	*samples;
+	size_t	size;
+}	t_wavetable;
 
-int		sine_wave(SDL_AudioDeviceID audio_device, t_note note);
-int		saw_wave(SDL_AudioDeviceID audio_device, t_note note);
-int		square_wave(SDL_AudioDeviceID audio_device, t_note note);
-int		tri_wave(SDL_AudioDeviceID audio_device, t_note note);
-t_song	parse(char *filename);
+typedef	t_wavetable (*t_wavefunc)(SDL_AudioDeviceID audio_device, t_note note);
+
+t_wavetable	sine_wave(SDL_AudioDeviceID audio_device, t_note note);
+t_wavetable	saw_wave(SDL_AudioDeviceID audio_device, t_note note);
+t_wavetable	square_wave(SDL_AudioDeviceID audio_device, t_note note);
+t_wavetable	tri_wave(SDL_AudioDeviceID audio_device, t_note note);
+t_song		parse(char *filename);
+size_t		add_note(t_note	note, t_instrument instrument, t_song *song, 
+					size_t track_i);
 
 static const t_wavefunc wave_functions[] = {
 	sine_wave,
