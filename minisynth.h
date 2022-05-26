@@ -6,7 +6,7 @@
 /*   By: cnysten <cnysten@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 12:14:58 by cnysten           #+#    #+#             */
-/*   Updated: 2022/05/25 17:57:35 by cnysten          ###   ########.fr       */
+/*   Updated: 2022/05/26 11:05:40 by carlnysten       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 # define GAIN 5000
 # define SAMPLE_SIZE 2
-# define FREQ 44100
+# define SAMPLE_RATE 44100
 
 typedef enum e_instrument
 {
@@ -70,8 +70,8 @@ int	tri_wave(SDL_AudioDeviceID audio_device, t_note note);
 static const t_wavefunc wave_functions[] = {
 	sine_wave,
 	saw_wave,
-	square_wave,
-	tri_wave
+	tri_wave,
+	square_wave
 };
 
 #endif

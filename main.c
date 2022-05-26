@@ -6,7 +6,7 @@
 /*   By: cnysten <cnysten@student.hive.fi>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2022/05/25 11:51:46 by cnysten		   #+#	#+#			 */
-/*   Updated: 2022/05/25 19:19:51 by cnysten          ###   ########.fr       */
+/*   Updated: 2022/05/26 12:35:12 by carlnysten       ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -38,9 +38,16 @@ void	play(t_song song, SDL_AudioDeviceID audio_device)
 
 void	play_wave(SDL_AudioDeviceID audio_device, t_note note)
 {
+	int	delay;
+
+	wave_functions[0](audio_device, note);
+	wave_functions[1](audio_device, note);
+	wave_functions[2](audio_device, note);
 	wave_functions[3](audio_device, note);
 	SDL_PauseAudioDevice(audio_device, 0);
-	SDL_Delay(SDL_GetQueuedAudioSize(audio_device) / 2 / FREQ * 1000);
+	delay = SDL_GetQueuedAudioSize(audio_device) / 2 / SAMPLE_RATE * 1000;
+	printf("Delay: %d", delay);
+	SDL_Delay(delay);
 	return ;
 }
 
@@ -55,10 +62,12 @@ t_song	parse(char *filename)
 SDL_AudioDeviceID	init_sdl(void)
 {
 	SDL_Init(SDL_INIT_AUDIO);
+
 	SDL_AudioDeviceID audio_device;
 	SDL_AudioSpec audio_spec;
+
 	SDL_zero(audio_spec);
-	audio_spec.freq = 44100;
+	audio_spec.freq = SAMPLE_RATE;
 	audio_spec.format = AUDIO_S16SYS;
 	audio_spec.channels = 2;
 	audio_spec.samples = 1024;
@@ -81,9 +90,9 @@ int	main(int argc, char **argv)
 			t_note	note;
 
 			note.pitch = a;
-			if (argv[1][2])
+			if (argv[1][2] <= 'g' && argv[1][2] >= 'a')
 				note.pitch = argv[1][2] - 'a' + 1;
-			note.duration = 5;
+			note.duration = 2;
 			printf("Debug 🎵\n");
 			play_wave(audio_device, note);
 		}
