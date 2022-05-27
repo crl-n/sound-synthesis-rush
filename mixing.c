@@ -6,7 +6,7 @@
 /*   By: jraivio <jraivio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 14:04:19 by jraivio           #+#    #+#             */
-/*   Updated: 2022/05/26 19:06:06 by jraivio          ###   ########.fr       */
+/*   Updated: 2022/05/27 16:40:38 by jraivio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ size_t	add_note(t_note	note, t_instrument instrument, t_song *song,
 			free(song->master);
 			song->master = temp; 
 		}
-		if (note.pitch > 0)
+		if (note.pitch > 1 && note.pitch < 40000)
 		{
-			song->master[track_i].sample += wavetable.samples[i % wavetable.size] * GAIN;
+			song->master[track_i].sample += wavetable.samples[i % wavetable.size];
 			song->master[track_i].instrument_count++;
 		}
 		track_i++;
@@ -50,5 +50,8 @@ void	mix_song_volume(t_song *song)
 	{
 		if (song->master[i].instrument_count > 1)
 			song->master[i].sample /= song->master[i].instrument_count;
+		//song->master[i].sample /= 16;
+		//if (song->master[i].sample > 0.99f)
+		//	printf("%f\n", song->master[i].sample);
 	}
 }
