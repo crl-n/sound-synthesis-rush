@@ -6,7 +6,7 @@
 /*   By: carlnysten <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 12:36:24 by carlnysten        #+#    #+#             */
-/*   Updated: 2022/05/27 11:43:14 by cnysten          ###   ########.fr       */
+/*   Updated: 2022/05/27 13:40:14 by cnysten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ t_note	get_note(char	*token, int tempo)
 			note_i = 8;
 			break;
 		case 'a':
-			note_i = 9;
+			note_i = 10;
 			break;
 		case 'b':
-			note_i = 11;
+			note_i = 12;
 			break;
 		case 'r':
 			note_i = -1;
@@ -86,6 +86,7 @@ t_note	get_note(char	*token, int tempo)
 	if (note_i < 0)
 		return(note);
 	note.pitch = (pitch_table[note_i] / 2);
+	printf("%f ", note.pitch);
 	for (int i = 0; i < octave; i++)
 		note.pitch *= 2;
 	return (note);
