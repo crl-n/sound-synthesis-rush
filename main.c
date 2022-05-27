@@ -1,38 +1,34 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: cnysten <cnysten@student.hive.fi>		  +#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2022/05/25 11:51:46 by cnysten		   #+#	#+#			 */
-/*   Updated: 2022/05/27 17:54:07 by jraivio          ###   ########.fr       */
-/*																			*/
+/*                                                    +:+ +:+         +:+     */
+/*   By: cnysten <cnysten@student.hive.fi>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/27 20:31:40 by cnysten           #+#    #+#             */
+/*   Updated: 2022/05/27 20:33:37 by cnysten          ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include <SDL.h>
 #include <SDL_audio.h>
 #include <stdio.h>
 #include <strings.h>
-
 #include "minisynth.h"
 
 void	play(t_song *song, SDL_AudioDeviceID audio_device)
 {
-//	exit(0);
-	int16_t sample_input;
+	int16_t		sample_input;
+	uint32_t	delay;
+
 	for (size_t i = 0; i < song->size; i++)
 	{
 		sample_input = (int16_t)(song->master[i].sample * GAIN);
 		SDL_QueueAudio(audio_device, &sample_input, SAMPLE_SIZE);
 	}
 	SDL_PauseAudioDevice(audio_device, 0);
-	uint32_t queued_audio_size = SDL_GetQueuedAudioSize(audio_device);
-	printf("queued audio size %u\n", queued_audio_size);
-	uint32_t delay = queued_audio_size / 2 / SAMPLE_RATE * 1000;
-	printf("delay %u\n", delay);
-	//SDL_Delay(song->size / SAMPLE_RATE * 1000);
-	SDL_Delay(song->size / SAMPLE_RATE * 1000);
+	delay = song->length / SAMPLE_RATE * 1000 + 500;
+	SDL_Delay(delay);
 	return ;
 }
 
@@ -43,7 +39,6 @@ void	play_wave(SDL_AudioDeviceID audio_device, t_note note)
 	wave_functions[0](note);
 	SDL_PauseAudioDevice(audio_device, 0);
 	delay = SDL_GetQueuedAudioSize(audio_device) / 2 / SAMPLE_RATE * 1000;
-	printf("Delay: %d", delay);
 	SDL_Delay(delay);
 	return ;
 }
@@ -72,7 +67,6 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		audio_device = init_sdl();
-
 		if (strncmp(argv[1], "-d", 2) == 0)
 		{
 			t_note	note;
@@ -88,6 +82,7 @@ int	main(int argc, char **argv)
 			mix_song_volume(&song);
 			printf("🎵\n");
 			play(&song, audio_device);
+			free(song.master);
 		}
 		SDL_CloseAudioDevice(audio_device);
 		SDL_Quit();

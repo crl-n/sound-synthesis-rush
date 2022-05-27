@@ -6,7 +6,7 @@
 /*   By: carlnysten <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 12:36:24 by carlnysten        #+#    #+#             */
-/*   Updated: 2022/05/27 15:23:53 by jraivio          ###   ########.fr       */
+/*   Updated: 2022/05/27 20:31:23 by cnysten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_note	get_note(char	*token, int tempo)
 			break;
 	}
 	token++;
-	while (token)
+	while (*token)
 		{
 			if (token[0] == '#' || token[0] == 'b')
 				note_i += (token[0] == 'b' ? -1 : 1);
@@ -96,9 +96,10 @@ t_song	parse(char *filename)
 	t_song	song;
 	FILE	*file;
 	size_t	sample_index = 0;
+	int	n_tracks = 1;
 
-	//bzero(&song, sizeof (t_song));
 	song.size = SAMPLE_RATE;
+	song.length = 0;
 	song.master = malloc(sizeof(song.master) * song.size);
 	if (!song.master)
 		exit(1);
@@ -125,7 +126,6 @@ t_song	parse(char *filename)
 		}
 		
 		// Get track instruments
-		int	n_tracks = 1;
 		int	trackid = 1;
 		t_instrument	track_instruments[32] = {0};
 		while ((bytes_read = getline(&line, &linesize, file)))
@@ -140,7 +140,7 @@ t_song	parse(char *filename)
 				}
 
 				// Get instruments
-				char			*token = strtok(line, ",");
+				char	*token = strtok(line, ",");
 				while (token != NULL)
 				{
 					if (!strcmp(line, "sine"))
@@ -164,7 +164,7 @@ t_song	parse(char *filename)
 
 		// Get track notes
 		trackid = 1;
-		while ((bytes_read = getline(&line, &linesize, file)))
+		while ((bytes_read = getline(&line, &linesize, file)) >= 0)
 		{
 			if (isdigit(line[0]) && line[1] == ':')
 			{
@@ -179,22 +179,16 @@ t_song	parse(char *filename)
 					);
 					token = strtok(NULL, " ");
 				}
-				free(line);
-				line = NULL;
 				//Reset between tracks
+				if (sample_index > song.length)
+					song.length = sample_index;
 				sample_index = 0;
 				get_note("c4/1.0", 120);
 				trackid++;
-				break ;
 			}
 			free(line);
 			line = NULL;
 		}
-		
-	}
-	else
-	{
-
 	}
 	return (song);
 }
