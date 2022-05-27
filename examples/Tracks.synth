@@ -1,5 +1,5 @@
 tempo 100
-tracks sine, sine, sine, sine
+tracks triangle,triangle,triangle,triangle
 
 1: c2 c3 c4 d5 d6 d7 e2 e3 e4 b5 b6 b7
 2: c2 c3 c4 d5 d6 d7 e2 e3 e4 b5 b6 b7

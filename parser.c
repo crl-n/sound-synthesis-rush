@@ -6,7 +6,7 @@
 /*   By: carlnysten <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 12:36:24 by carlnysten        #+#    #+#             */
-/*   Updated: 2022/05/27 20:31:23 by cnysten          ###   ########.fr       */
+/*   Updated: 2022/05/27 22:57:17 by cnysten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,20 +140,20 @@ t_song	parse(char *filename)
 				}
 
 				// Get instruments
-				char	*token = strtok(line, ",");
+				char	*token = strtok(line, " ");
+				token = strtok(NULL, ",");
 				while (token != NULL)
 				{
-					if (!strcmp(line, "sine"))
+					if (strstr(token, "sine"))
 						track_instruments[trackid++] = sine;
-					else if (!strcmp(line, "saw"))
+					else if (strstr(token, "saw"))
 						track_instruments[trackid++] = saw;
-					else if (!strcmp(line, "triangle"))
+					else if (strstr(token, "triangle"))
 						track_instruments[trackid++] = triangle;
-					else if (!strcmp(line, "square"))
+					else if (strstr(token, "square"))
 						track_instruments[trackid++] = square;
 					token = strtok(NULL, ",");
 				}
-				
 				free(line);
 				line = NULL;
 				break ;

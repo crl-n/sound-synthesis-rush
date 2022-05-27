@@ -6,7 +6,7 @@
 /*   By: carlnysten <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:03:07 by carlnysten        #+#    #+#             */
-/*   Updated: 2022/05/27 20:49:41 by cnysten          ###   ########.fr       */
+/*   Updated: 2022/05/27 23:00:56 by cnysten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_wavetable	sine_wave(t_note note)
 
 t_wavetable	saw_wave(t_note note)
 {
-	if (note.pitch == 0.f)
+	if (note.pitch < 0.f)
 		return((t_wavetable){.samples = NULL, .size = 0});
 	float	x = -0.01 * note.pitch / 2;
 	t_wavetable wavetable;
@@ -60,7 +60,7 @@ t_wavetable	saw_wave(t_note note)
 
 t_wavetable	tri_wave(t_note note)
 {
-	if (note.pitch == 0.f)
+	if (note.pitch < 0.f)
 		return((t_wavetable){.samples = NULL, .size = 0});
 	float	x = 0.0f;
 	float	sine_value = 0.0f;
@@ -83,7 +83,7 @@ t_wavetable	tri_wave(t_note note)
 
 t_wavetable	square_wave(t_note note)
 {
-	if (note.pitch == 0.f)
+	if (note.pitch < 0.f)
 		return((t_wavetable){.samples = NULL, .size = 0});
 	float	x = 0.0f;
 	float	sine_value = 0.0f;
