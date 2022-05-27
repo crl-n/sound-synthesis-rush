@@ -16,3 +16,4 @@ Sdl2 is required to compile Minisynth. Install sdl2 using homebrew. [Get homebre
 ```
 brew install sdl2
 ```
+Use the makefile to compile the project.
