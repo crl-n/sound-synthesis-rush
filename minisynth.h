@@ -6,7 +6,7 @@
 /*   By: cnysten <cnysten@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 12:14:58 by cnysten           #+#    #+#             */
-/*   Updated: 2022/05/27 11:43:00 by cnysten          ###   ########.fr       */
+/*   Updated: 2022/05/27 15:39:46 by jraivio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <SDL.h>
 
-# define GAIN 5000
+# define GAIN 2500
 # define SAMPLE_SIZE 2
 # define SAMPLE_RATE 44100
 
@@ -47,7 +47,7 @@ typedef struct	s_note
 
 typedef struct	s_track
 {
-	int16_t		sample;
+	float		sample;
 	int8_t		instrument_count;
 }	t_track;
 

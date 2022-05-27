@@ -6,7 +6,7 @@
 /*   By: carlnysten <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 12:36:24 by carlnysten        #+#    #+#             */
-/*   Updated: 2022/05/27 13:44:46 by cnysten          ###   ########.fr       */
+/*   Updated: 2022/05/27 15:23:53 by jraivio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,9 @@ t_song	parse(char *filename)
 				}
 				free(line);
 				line = NULL;
+				//Reset between tracks
 				sample_index = 0;
+				get_note("c4/1.0", 120);
 				trackid++;
 				break ;
 			}
