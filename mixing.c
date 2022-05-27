@@ -6,7 +6,7 @@
 /*   By: jraivio <jraivio@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 14:04:19 by jraivio           #+#    #+#             */
-/*   Updated: 2022/05/27 16:40:38 by jraivio          ###   ########.fr       */
+/*   Updated: 2022/05/27 18:43:56 by jraivio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ size_t	add_note(t_note	note, t_instrument instrument, t_song *song,
 
 	for (size_t i = 0; i < note.duration; i++)
 	{
-		if (track_i > song->size)
+		if (track_i >= song->size)
 		{
 			t_track *temp = malloc(sizeof(t_track) * (song->size * 2));
 			if (!temp)

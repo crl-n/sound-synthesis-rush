@@ -6,7 +6,7 @@
 /*   By: carlnysten <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 12:36:24 by carlnysten        #+#    #+#             */
-/*   Updated: 2022/05/27 15:23:53 by jraivio          ###   ########.fr       */
+/*   Updated: 2022/05/27 18:42:23 by jraivio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_note	get_note(char	*token, int tempo)
 			break;
 	}
 	token++;
-	while (token)
+	while (*token)
 		{
 			if (token[0] == '#' || token[0] == 'b')
 				note_i += (token[0] == 'b' ? -1 : 1);
@@ -82,6 +82,8 @@ t_note	get_note(char	*token, int tempo)
 			}
 			token++;
 		}
+	if (octave > 9)
+		printf("Octave too high: %d\n", octave);
 	note.duration = (size_t)(((float)SAMPLE_RATE * (60 / (float)tempo)) * beat_length);
 	if (note_i < 0)
 		return(note);
@@ -96,6 +98,7 @@ t_song	parse(char *filename)
 	t_song	song;
 	FILE	*file;
 	size_t	sample_index = 0;
+	int	n_tracks = 1;
 
 	//bzero(&song, sizeof (t_song));
 	song.size = SAMPLE_RATE;
@@ -125,7 +128,6 @@ t_song	parse(char *filename)
 		}
 		
 		// Get track instruments
-		int	n_tracks = 1;
 		int	trackid = 1;
 		t_instrument	track_instruments[32] = {0};
 		while ((bytes_read = getline(&line, &linesize, file)))
@@ -196,6 +198,7 @@ t_song	parse(char *filename)
 	{
 
 	}
+	printf("Tracks: %d\n", n_tracks);
 	return (song);
 }
 
