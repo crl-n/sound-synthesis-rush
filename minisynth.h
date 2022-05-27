@@ -6,7 +6,7 @@
 /*   By: cnysten <cnysten@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 12:14:58 by cnysten           #+#    #+#             */
-/*   Updated: 2022/05/27 20:21:46 by cnysten          ###   ########.fr       */
+/*   Updated: 2022/05/28 00:06:59 by cnysten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <SDL.h>
 # include <string.h>
 
-# define GAIN 20000
+# define GAIN 10000
 # define SAMPLE_SIZE 2
 # define SAMPLE_RATE 44100
 
@@ -24,8 +24,8 @@ typedef enum e_instrument
 {
 	sine,
 	saw,
-	square,
-	triangle
+	triangle,
+	square
 }	t_instrument;
 
 typedef enum e_pitch
