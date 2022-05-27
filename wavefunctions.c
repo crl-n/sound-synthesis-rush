@@ -6,14 +6,13 @@
 /*   By: carlnysten <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:03:07 by carlnysten        #+#    #+#             */
-/*   Updated: 2022/05/27 10:20:51 by cnysten          ###   ########.fr       */
+/*   Updated: 2022/05/27 20:33:31 by jraivio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <SDL.h>
 #include <math.h>
 #include "minisynth.h"
-#include <stdio.h>
 
 t_wavetable	sine_wave(t_note note)
 {
