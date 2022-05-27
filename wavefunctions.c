@@ -6,7 +6,7 @@
 /*   By: carlnysten <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:03:07 by carlnysten        #+#    #+#             */
-/*   Updated: 2022/05/26 19:00:24 by jraivio          ###   ########.fr       */
+/*   Updated: 2022/05/27 10:20:51 by cnysten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,6 @@
 #include <math.h>
 #include "minisynth.h"
 #include <stdio.h>
-
-//#define TEMPO 110
-
-/*
-static const float pitch[] = {
-	0.0f,
-	220.0f,
-	246.94f,
-	261.63f,
-	293.66f,
-	329.63f,
-	349.23f,
-	392.00f
-};
-*/
 
 t_wavetable	sine_wave(t_note note)
 {
@@ -118,5 +103,4 @@ t_wavetable	square_wave(t_note note)
 		wavetable.samples[i] = (sine_value < 0) ? GAIN : -GAIN;
 	}
 	return (wavetable);
-	//printf("Square\n");
 }

@@ -9,9 +9,10 @@ The binary takes as argument the file path of the song to be played.
 ```
 ./minisynth [path to .synth file]
 ```
+The examples folder contains .synth files for testing.
 
-## Build
-Install sdl2 using homebrew. [Get homebrew for cluster computers from here.](https://github.com/gcamerli/42brew)
+## Requirements
+Sdl2 is required to compile Minisynth. Install sdl2 using homebrew. [Get homebrew for cluster computers from here.](https://github.com/gcamerli/42brew)
 ```
 brew install sdl2
 ```

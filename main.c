@@ -6,7 +6,7 @@
 /*   By: cnysten <cnysten@student.hive.fi>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2022/05/25 11:51:46 by cnysten		   #+#	#+#			 */
-/*   Updated: 2022/05/26 18:44:12 by jraivio          ###   ########.fr       */
+/*   Updated: 2022/05/27 12:04:56 by cnysten          ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -24,7 +24,12 @@ void	play(t_song *song, SDL_AudioDeviceID audio_device)
 		SDL_QueueAudio(audio_device, &song->master[i].sample, SAMPLE_SIZE);
 	}
 	SDL_PauseAudioDevice(audio_device, 0);
-	SDL_Delay(15000);
+	uint32_t queued_audio_size = SDL_GetQueuedAudioSize(audio_device);
+	printf("queued audio size %u\n", queued_audio_size);
+	uint32_t delay = queued_audio_size / 2 / SAMPLE_RATE * 1000;
+	printf("delay %u\n", delay);
+	//SDL_Delay(song->size / SAMPLE_RATE * 1000);
+	SDL_Delay(song->size / SAMPLE_RATE * 1000);
 	return ;
 }
 
@@ -33,9 +38,6 @@ void	play_wave(SDL_AudioDeviceID audio_device, t_note note)
 	int	delay;
 
 	wave_functions[0](note);
-//	wave_functions[1](audio_device, note);
-//	wave_functions[2](audio_device, note);
-//	wave_functions[3](audio_device, note);
 	SDL_PauseAudioDevice(audio_device, 0);
 	delay = SDL_GetQueuedAudioSize(audio_device) / 2 / SAMPLE_RATE * 1000;
 	printf("Delay: %d", delay);
@@ -45,15 +47,14 @@ void	play_wave(SDL_AudioDeviceID audio_device, t_note note)
 
 SDL_AudioDeviceID	init_sdl(void)
 {
-	SDL_Init(SDL_INIT_AUDIO);
-
 	SDL_AudioDeviceID audio_device;
 	SDL_AudioSpec audio_spec;
 
+	SDL_Init(SDL_INIT_AUDIO);
 	SDL_zero(audio_spec);
 	audio_spec.freq = SAMPLE_RATE;
 	audio_spec.format = AUDIO_S16SYS;
-	audio_spec.channels = 2;
+	audio_spec.channels = 1;
 	audio_spec.samples = 1024;
 	audio_spec.callback = NULL;
 	audio_device = SDL_OpenAudioDevice(
@@ -74,8 +75,6 @@ int	main(int argc, char **argv)
 			t_note	note;
 
 			note.pitch = 440.0f;
-			//if (argv[1][2] <= 'g' && argv[1][2] >= 'a')
-			//	note.pitch = argv[1][2] - 'a' + 1;
 			note.duration = 2 * SAMPLE_RATE;
 			printf("Debug 🎵\n");
 			play_wave(audio_device, note);
@@ -87,6 +86,8 @@ int	main(int argc, char **argv)
 			printf("🎵\n");
 			play(&song, audio_device);
 		}
+		SDL_CloseAudioDevice(audio_device);
+		SDL_Quit();
 	}
 	else
 	{

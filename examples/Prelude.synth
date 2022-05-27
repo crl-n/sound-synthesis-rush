@@ -1,0 +1,18 @@
+# Prelude no. 2 in C minor, BWV 847 - Johann Sebastian Bach
+
+tempo 60
+tracks triangle,triangle,triangle,triangle,triangle
+
+# Right hand
+
+1: c6/0.25 d#5 d d# c d# d d# c6 d#5 d d# c d# d d# g# f e f c f e f g# f e f c f e f b f d# f d f d# f b f d# f d f d# f c6 g5 f g d# g f g c6 g5 f g d# g f g d#6 g#5 g g# d# g# g g# d#6 g#5 g g# d# g# g g# d6 f#5 e f# d f# e f# d6 f#5 e f# d f# e f# d6 g5 f# g d g f# g d6 g5 f# g d g f# g c6 e5 d e c e d e c6 e5 d e c e d e c6 f5 e f c f e f c6 f5 e f c f e f a# f d# f d f d# f a# f d# f d f d# f a# g f g d# g f g a# g f g d# g f g g# g f g d# g f g g# g f g d# g f g g# d c d a#4 d5 c d g# d c d a#4 d5 c d g a#4 g# a# d#5 a#4 g# a# g5 a#4 g# a# d#5 a#4 g# a# f5 c a#4 c5 a4 c5 a#4 c5 f c a#4 c5 a4 c5 a#4 c5 f d c d b4 d5 c d f d c d b4 d5 c d f d c d b4 d5 c d f d c d b4 d5 c d d# c b4 c5 g4 c5 b4 c5 d# c b4 c5 g4 c5 b4 c5 f4 d#5 d d# f d# d d# f4 d#5 d d# f d# d d# f#4 c5 b4 c5 d# c b4 c5 f#4 c5 b4 c5 d# c b4 c5 d# c b4 c5 g4 c5 b4 c5 d# c b4 c5 g4 c5 b4 c5 f# c b4 c5 a4 c5 b4 c5 f# c b4 c5 a4 c5 b4 c5 g c b4 c5 d c b4 c5 g c b4 c5 d c b4 c5 g# c b4 c5 d c b4 c5 g# c b4 c5 d c b4 c5 r/0.75 f4/0.25 g# f e f b f d5 b4 g# f e f r/0.75 g/0.25 c5 g4 f# g d#5 c g d# c g#4 g g# r/0.75 c5/0.25 d# c b4 c5 f# c a f# d# c b4 c5 r d6 c d d# c b5 c6 a5 c6 b5 c6 d b5 a b g b a b c6 a5 g a f# a g a b g f# g d g6 f g g# f d# f d f d# f g d# d d# c d# d d# f d c d b5 d6 c d d# c a#5 c6 g5 c6 b5 c6 g#5 f6 d# f g5 d#6 d d# f5 d6 c d d#5 c6 b5 c6 g#5 f d# f g d# d d# f d c d r/0.0625 c/0.6875 d/0.125 e f/0.0625 r/0.0041 g/0.0625 r a# r a# r g r/0.2458 g/0.125 e f/0.0541 e/0.0416 f/0.5416 g/0.125 f e f g g# g f/0.0625 d# d d# f d d# f b4/0.75 d/0.25 f g# g f b f d5 f4 b g# g f e c#5 a#4 g c5 g#4 f g# g a# g e g# f d f e g e c f d b3 d4 r/0.75 d/0.25 e g a# g g# c5 f d f g# c6 b5 c6 g5 f d e/0.125 r/0.1083 e/2.7916
+
+2: r/132.083 e5/0.5416 c/0.375 r/0.125 g#/0.0625 r c6 r g#5 r f/0.25 r/0.325 c/0.9375 r/16.1166 d/0.125
+
+# Left hand
+
+3: c4/0.25 g f g d# g f g c g f g d# g f g c g# g g# f g# g g# c g# g g# f g# g g# c g# g g# f g# g g# c g# g g# f g# g g# c d# d d# g d# d d# c d# d d# g d# d d# c c5 a#4 c5 g#4 c5 a#4 c5 c4 c5 a#4 c5 g#4 c5 a#4 c5 c4 a g a f# a g a c a g a f# a g a a#3 a#4 a a# g a# a a# a#3 a#4 a a# g a# a a# a#3 g4 f g e g f g a#3 g4 f g e g f g g#3 g#4 g g# f g# g g# g#3 g#4 g g# f g# g g# g#3 d4 c d f d c d g#3 d4 c d f d c d g3 d#4 d d# g d# d d# g3 d#4 d d# g d# d d# c d# d d# g# d# d d# c d# d d# g# d# d d# d f d# f g# f d# f d f d# f g# f d# f d# g f g g# g f g d# g f g g# g f g d# a g a f a g a d# a g a f a g a d f d# f g# f d# f d f d# f g# f d# f c f e f g# f e f c f e f g# f e f c d# d d# f d# d d# a#3 d#4 d d# f d# d d# g#3 c4 b3 c4 d c b3 c4 g#3 c4 b3 c4 d c b3 c4 a3 d#4 d d# c d# d d# a3 d#4 d d# c d# d d# g3 d#4 d d# f d# d d# g3 d#4 d d# f d# d d# g3 d#4 d d# c d# d d# g3 d#4 d d# c d# d d# g3 d#4 d d# f d# d d# g3 d#4 d d# f d# d d# g3 d#4 d d# f d# d d# g3 d#4 d d# f d# d d# g3 b d4 r/3.25 g3/0.25 c4 d# r/3.25 g3/0.25 a f#4 r/3.25 g3/4.2458 r/0.0041 d5/0.25 c d d# c b4 c5 a4 c5 b4 c5 d b4 a b g b a b c5 g#4 g g# f a g a b g f g d# g5 f g g# r/0.0166 f/0.25 r/0.2333 f/0.25 d f d# f g d# d d# c d# d d# f d c d d# c b4 c5 d b4 a b c5 d# d d# f4 d5 c d d#4 c5 b4 c5 d4 b a b c/1 r c r/1.25 c3/3.75 r/6 c/8
+
+4: r/121.5 d#5/0.25 r/10.2708 g4/0.9791 r/1.0208 f/0.9791 r/1.5 b3/3.5 r/6.25 g/7.75
+
+5: r/132.042 a#4/0.9583 r/1.0416 g#/0.9583 r/11.5 c/7.5
