@@ -6,7 +6,7 @@
 /*   By: cnysten <cnysten@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 12:14:58 by cnysten           #+#    #+#             */
-/*   Updated: 2022/05/27 15:39:46 by jraivio          ###   ########.fr       */
+/*   Updated: 2022/05/27 20:21:46 by cnysten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 # define MINISYNTH_H
 
 # include <SDL.h>
+# include <string.h>
 
-# define GAIN 2500
+# define GAIN 20000
 # define SAMPLE_SIZE 2
 # define SAMPLE_RATE 44100
 
@@ -55,6 +56,7 @@ typedef struct	s_song
 {
 	t_track	*master;
 	size_t	size;
+	size_t	length;
 	int		tempo;
 }	t_song;
 

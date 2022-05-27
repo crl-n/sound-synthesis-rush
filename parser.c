@@ -6,7 +6,7 @@
 /*   By: carlnysten <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 12:36:24 by carlnysten        #+#    #+#             */
-/*   Updated: 2022/05/27 18:42:23 by jraivio          ###   ########.fr       */
+/*   Updated: 2022/05/27 20:31:23 by cnysten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,6 @@ t_note	get_note(char	*token, int tempo)
 			}
 			token++;
 		}
-	if (octave > 9)
-		printf("Octave too high: %d\n", octave);
 	note.duration = (size_t)(((float)SAMPLE_RATE * (60 / (float)tempo)) * beat_length);
 	if (note_i < 0)
 		return(note);
@@ -100,8 +98,8 @@ t_song	parse(char *filename)
 	size_t	sample_index = 0;
 	int	n_tracks = 1;
 
-	//bzero(&song, sizeof (t_song));
 	song.size = SAMPLE_RATE;
+	song.length = 0;
 	song.master = malloc(sizeof(song.master) * song.size);
 	if (!song.master)
 		exit(1);
@@ -142,7 +140,7 @@ t_song	parse(char *filename)
 				}
 
 				// Get instruments
-				char			*token = strtok(line, ",");
+				char	*token = strtok(line, ",");
 				while (token != NULL)
 				{
 					if (!strcmp(line, "sine"))
@@ -166,7 +164,7 @@ t_song	parse(char *filename)
 
 		// Get track notes
 		trackid = 1;
-		while ((bytes_read = getline(&line, &linesize, file)))
+		while ((bytes_read = getline(&line, &linesize, file)) >= 0)
 		{
 			if (isdigit(line[0]) && line[1] == ':')
 			{
@@ -181,24 +179,17 @@ t_song	parse(char *filename)
 					);
 					token = strtok(NULL, " ");
 				}
-				free(line);
-				line = NULL;
 				//Reset between tracks
+				if (sample_index > song.length)
+					song.length = sample_index;
 				sample_index = 0;
 				get_note("c4/1.0", 120);
 				trackid++;
-				break ;
 			}
 			free(line);
 			line = NULL;
 		}
-		
 	}
-	else
-	{
-
-	}
-	printf("Tracks: %d\n", n_tracks);
 	return (song);
 }
 
